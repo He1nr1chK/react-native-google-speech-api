@@ -10,9 +10,18 @@
 
 #### iOS
 
-1. Place the module into node_mudules
-2. Add pod 'RNReactNativeGoogleStt', :path => '../node_modules/react-native-google-speech-api/ios' to the Podfile
-3. cd ios and pod install
+1. Place the module into `node_mudules`
+2. Add to the Podfile:
+
+  	```
+    pod 'RNReactNativeGoogleStt', :path => '../node_modules/react-native-google-speech-api/ios'
+  	```
+3. Run:
+
+  	```
+    cd ios
+    pod install
+  	```
 
 #### Android
 
@@ -116,4 +125,3 @@ export default class App extends Component {
   }
 }
 ```
-  
