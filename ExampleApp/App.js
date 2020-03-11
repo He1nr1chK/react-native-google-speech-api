@@ -20,6 +20,10 @@ import {
 
 import React, { Component } from 'react';
 
+import {
+  AppState
+} from 'react-native'
+
 const { GoogleSpeechApi } = NativeModules;
 
 const EventEmitter = Platform.select({
@@ -31,15 +35,16 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
-      currentText: "", 
+    this.state = {
+      currentText: "",
       previousTexts: "",
       button: "Start listening"
     };
   }
 
   componentDidMount(){
-  	GoogleSpeechApi.setApiKey("Your google access token")
+    AppState.addEventListener('change', this.onAppStateChange)
+    GoogleSpeechApi.setApiKey("Your google access token")
     EventEmitter.addListener('onSpeechRecognized', (event) => {
       var previousTexts = this.state.previousTexts;
       var currentText = event['text']
@@ -56,15 +61,45 @@ export default class App extends Component {
       });
     });
 
+    EventEmitter.addListener('onStartError', (error) => {
+      var previousTexts = this.state.previousTexts;
+      this.setState({
+        currentText: "",
+        button: "Start listening"
+      });
+      Alert.alert(
+        "Error occured",
+        error['message']
+      );
+    });
+
+    EventEmitter.addListener('onStopError', (error) => {
+      var previousTexts = this.state.previousTexts;
+      this.setState({
+        currentText: "",
+        button: "Start listening"
+      });
+      Alert.alert(
+        "Error occured",
+        error['message']
+      );
+    });
+
     EventEmitter.addListener('onSpeechRecognizedError', (error) => {
         this.setState({
           button: "Start listening"
         })
         Alert.alert(
-          "Error occured", 
+          "Error occured",
           error['message']
         );
     });
+  }
+
+  onAppStateChange = state => {
+    if (state.match(/inactive|background/)) {
+      GoogleSpeechApi.stop()
+    }
   }
 
   startListening = () => {
