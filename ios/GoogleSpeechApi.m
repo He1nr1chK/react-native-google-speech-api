@@ -5,12 +5,13 @@
 
 #import "GoogleSpeechApi.h"
 
-@interface GoogleSpeechApi () <AVAudioRecorderDelegate, AVAudioPlayerDelegate, AudioControllerDelegate>
-@property (nonatomic, strong) AVAudioRecorder *audioRecorder;
+@interface GoogleSpeechApi () <AudioControllerDelegate>
+
 @property (nonatomic, strong) NSString *apiKey;
 @property (nonatomic, strong) NSMutableData *audioData;
 @property (nonatomic, strong) AudioController *audioController;
 @property (nonatomic, assign) double sampleRate;
+
 @end
 
 @implementation GoogleSpeechApi
@@ -59,12 +60,6 @@ RCT_EXPORT_METHOD(stop) {
 
 - (NSArray<NSString *>*)supportedEvents {
     return @[@"onSpeechRecognized", @"onSpeechRecognizedError", @"onStartError", @"onStopError"];
-}
-
-- (NSString *)soundFilePath {
-    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsDir = dirPaths[0];
-    return [docsDir stringByAppendingPathComponent:@"sound.caf"];
 }
 
 #pragma mark - Private
