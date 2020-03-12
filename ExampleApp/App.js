@@ -45,6 +45,9 @@ export default class App extends Component {
   componentDidMount(){
     AppState.addEventListener('change', this.onAppStateChange)
     GoogleSpeechApi.setApiKey("Your google access token")
+    if (Platform.OS === 'ios') {
+      GoogleSpeechApi.setSpeechContextPhrases(["weather"])
+    }
     EventEmitter.addListener('onSpeechRecognized', (event) => {
       var previousTexts = this.state.previousTexts;
       var currentText = event['text']

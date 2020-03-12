@@ -31,6 +31,7 @@ typedef void (^SpeechRecognitionCompletionHandler)(StreamingRecognizeResponse *o
 - (BOOL) isStreaming;
 
 @property (nonatomic, assign) double sampleRate;
-@property (nonatomic, assign) NSString* apiKey;
+@property (nonatomic, strong) NSString *apiKey;
+@property (nonatomic, strong) NSArray<NSString *> *speechContextPhrases;
 
 @end
