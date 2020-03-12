@@ -7,7 +7,6 @@
 
 @interface GoogleSpeechApi () <AudioControllerDelegate>
 
-@property (nonatomic, strong) NSString *apiKey;
 @property (nonatomic, strong) NSMutableData *audioData;
 @property (nonatomic, strong) AudioController *audioController;
 @property (nonatomic, assign) double sampleRate;
@@ -21,8 +20,11 @@ RCT_EXPORT_MODULE()
 #pragma mark - EXPORT METHODS
 
 RCT_EXPORT_METHOD(setApiKey:(NSString *)apiKey) {
-    _apiKey = apiKey;
     [SpeechRecognitionService sharedInstance].apiKey = apiKey;
+}
+
+RCT_EXPORT_METHOD(setSpeechContextPhrases:(NSArray<NSString *> *)speechContextPhrases) {
+    [SpeechRecognitionService sharedInstance].speechContextPhrases = speechContextPhrases;
 }
 
 RCT_EXPORT_METHOD(start) {
@@ -156,7 +158,7 @@ RCT_EXPORT_METHOD(stop) {
          withCompletion:^(StreamingRecognizeResponse *response, NSError *error) {
             if (error) {
                 [self sendEventWithName:@"onSpeechRecognizedError"
-                                   body:@{@"message": error.localizedDescription, @"isFinal":@(YES)}];
+                                   body:@{@"message": error.localizedDescription, @"isFinal":@YES}];
                 [self stopSpeech];
             } else if (response) {
                 BOOL finished = NO;

@@ -61,13 +61,17 @@
 
     [_call start];
     _streaming = YES;
-
+      
     // send an initial request message to configure the service
+    SpeechContext *speechContext = [[SpeechContext alloc] init];
+    [speechContext.phrasesArray addObjectsFromArray:self.speechContextPhrases];
+      
     RecognitionConfig *recognitionConfig = [RecognitionConfig message];
     recognitionConfig.encoding = RecognitionConfig_AudioEncoding_Linear16;
     recognitionConfig.sampleRateHertz = self.sampleRate;
     recognitionConfig.languageCode = @"en-US";
     recognitionConfig.maxAlternatives = 1;
+    [recognitionConfig.speechContextsArray addObject:speechContext];
 
     StreamingRecognitionConfig *streamingRecognitionConfig = [StreamingRecognitionConfig message];
     streamingRecognitionConfig.config = recognitionConfig;
