@@ -61,11 +61,11 @@
 
     [_call start];
     _streaming = YES;
-      
+
     // send an initial request message to configure the service
     SpeechContext *speechContext = [[SpeechContext alloc] init];
     [speechContext.phrasesArray addObjectsFromArray:self.speechContextPhrases];
-      
+
     RecognitionConfig *recognitionConfig = [RecognitionConfig message];
     recognitionConfig.encoding = RecognitionConfig_AudioEncoding_Linear16;
     recognitionConfig.sampleRateHertz = self.sampleRate;
