@@ -148,7 +148,7 @@ RCT_EXPORT_METHOD(stop) {
     }
     
     // We recommend sending samples in 100ms chunks
-    int chunk_size = 0.1 /* seconds/chunk */ * _sampleRate * 2 /* bytes/sample */ ; /* bytes/chunk */
+    int chunk_size = 0.1 /* seconds/chunk */ * self.sampleRate * 2 /* bytes/sample */ ; /* bytes/chunk */
     
     if ([self.audioData length] > chunk_size) {
         [[SpeechRecognitionService sharedInstance]
@@ -172,8 +172,7 @@ RCT_EXPORT_METHOD(stop) {
                     [self stopSpeech];
                 }
             }
-        }
-         ];
+        }];
         self.audioData = [[NSMutableData alloc] init];
     }
 }

@@ -27,17 +27,17 @@
 @implementation AudioController
 
 - (instancetype) initWithSampleRate:(double)specifiedSampleRate {
-    self = [super init];
+  self = [super init];
     if (self) {
-        _specifiedSampleRate = specifiedSampleRate;
+      _specifiedSampleRate = specifiedSampleRate;
     }
-    return self;
+  return self;
 }
 
 - (OSStatus) recreateIOUnit {
-    AudioComponentInstanceDispose(remoteIOUnit);
-    audioComponentInitialized = NO;
-    return [self prepare];
+  AudioComponentInstanceDispose(remoteIOUnit);
+  audioComponentInitialized = NO;
+  return [self prepare];
 }
 
 - (void) dealloc {
@@ -267,7 +267,7 @@ static OSStatus playbackCallback(void *inRefCon,
 }
 
 - (OSStatus) start {
-    return AudioOutputUnitStart(self->remoteIOUnit);
+  return AudioOutputUnitStart(self->remoteIOUnit);
 }
 
 - (OSStatus) stop {

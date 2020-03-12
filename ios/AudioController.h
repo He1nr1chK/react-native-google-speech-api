@@ -28,7 +28,7 @@
 
 @property (nonatomic, assign, readonly) double specifiedSampleRate;
 
-- (instancetype)initWithSampleRate:(double)specifiedSampleRate;
+- (instancetype) initWithSampleRate:(double)specifiedSampleRate;
 
 - (OSStatus) recreateIOUnit;
 
