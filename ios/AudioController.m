@@ -26,12 +26,18 @@
 
 @implementation AudioController
 
-+ (instancetype) sharedInstance {
-  static AudioController *instance = nil;
-  if (!instance) {
-    instance = [[self alloc] init];
-  }
-  return instance;
+- (instancetype) initWithSampleRate:(double)specifiedSampleRate {
+  self = [super init];
+    if (self) {
+      _specifiedSampleRate = specifiedSampleRate;
+    }
+  return self;
+}
+
+- (OSStatus) recreateIOUnit {
+  AudioComponentInstanceDispose(remoteIOUnit);
+  audioComponentInitialized = NO;
+  return [self prepare];
 }
 
 - (void) dealloc {
@@ -121,13 +127,13 @@ static OSStatus playbackCallback(void *inRefCon,
   return status;
 }
 
-- (OSStatus) prepareWithSampleRate:(double) specifiedSampleRate {
+- (OSStatus) prepare {
   OSStatus status = noErr;
 
   AVAudioSession *session = [AVAudioSession sharedInstance];
 
   NSError *error;
-  BOOL ok = [session setCategory:AVAudioSessionCategoryRecord error:&error];
+  [session setCategory:AVAudioSessionCategoryRecord error:&error];
 
   // This doesn't seem to really indicate a problem (iPhone 6s Plus)
 #ifdef IGNORE
@@ -140,7 +146,7 @@ static OSStatus playbackCallback(void *inRefCon,
   [session setPreferredIOBufferDuration:10 error:&error];
 
   double sampleRate = session.sampleRate;
-  sampleRate = specifiedSampleRate;
+  sampleRate = self.specifiedSampleRate;
   if (!audioComponentInitialized) {
     audioComponentInitialized = YES;
     // Describe the RemoteIO unit

@@ -24,12 +24,25 @@
 
 @interface AudioController : NSObject
 
-+ (instancetype) sharedInstance;
-
 @property (nonatomic, weak) id<AudioControllerDelegate> delegate;
 
-- (OSStatus) prepareWithSampleRate:(double) sampleRate;
+@property (nonatomic, assign, readonly) double specifiedSampleRate;
+
+- (instancetype) initWithSampleRate:(double)specifiedSampleRate;
+
+- (OSStatus) recreateIOUnit;
+
+- (OSStatus) prepare;
+
 - (OSStatus) start;
+
 - (OSStatus) stop;
+
+@end
+
+@interface AudioController (Unavailable)
+
+- (instancetype) init NS_UNAVAILABLE;
++ (instancetype) new NS_UNAVAILABLE;
 
 @end
