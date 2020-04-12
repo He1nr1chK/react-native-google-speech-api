@@ -71,6 +71,10 @@
     recognitionConfig.sampleRateHertz = self.sampleRate;
     recognitionConfig.languageCode = @"en-US";
     recognitionConfig.maxAlternatives = 1;
+    recognitionConfig.enableWordTimeOffsets = YES
+    recognitionConfig.enableSpeakerDiarization = YES
+  //recognitionConfig.model = "phone_call"
+    recognitionConfig.enableAutomaticPunctuation = YES
     [recognitionConfig.speechContextsArray addObject:speechContext];
 
     StreamingRecognitionConfig *streamingRecognitionConfig = [StreamingRecognitionConfig message];
