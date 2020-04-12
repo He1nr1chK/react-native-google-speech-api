@@ -1,23 +1,28 @@
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
-#import "google/cloud/speech/v1/CloudSpeech.pbrpc.h"
-#import "google/cloud/speech/v1/CloudSpeech.pbobjc.h"
-#import <ProtoRPC/ProtoRPC.h>
+#import "google/cloud/speech/v1p1beta1/CloudSpeech.pbrpc.h"
+#import "google/cloud/speech/v1p1beta1/CloudSpeech.pbobjc.h"
+#import <ProtoRPC/ProtoRPCLegacy.h>
 #import <RxLibrary/GRXWriter+Immediate.h>
 
 #import "google/api/Annotations.pbobjc.h"
 #import "google/longrunning/Operations.pbobjc.h"
 #if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
-#import <Protobuf/Any.pbobjc.h>
+#import <protobuf/Any.pbobjc.h>
 #else
 #import "google/protobuf/Any.pbobjc.h"
 #endif
 #if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
-#import <Protobuf/Duration.pbobjc.h>
+#import <protobuf/Duration.pbobjc.h>
 #else
 #import "google/protobuf/Duration.pbobjc.h"
 #endif
 #if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
-#import <Protobuf/Timestamp.pbobjc.h>
+#import <protobuf/Empty.pbobjc.h>
+#else
+#import "google/protobuf/Empty.pbobjc.h"
+#endif
+#if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
+#import <protobuf/Timestamp.pbobjc.h>
 #else
 #import "google/protobuf/Timestamp.pbobjc.h"
 #endif
@@ -31,14 +36,14 @@
 // Designated initializer
 - (instancetype)initWithHost:(NSString *)host callOptions:(GRPCCallOptions *_Nullable)callOptions {
   return [super initWithHost:host
-                 packageName:@"google.cloud.speech.v1"
+                 packageName:@"google.cloud.speech.v1p1beta1"
                  serviceName:@"Speech"
                  callOptions:callOptions];
 }
 
 - (instancetype)initWithHost:(NSString *)host {
   return [super initWithHost:host
-                 packageName:@"google.cloud.speech.v1"
+                 packageName:@"google.cloud.speech.v1p1beta1"
                  serviceName:@"Speech"];
 }
 
@@ -72,7 +77,6 @@
 
 #pragma mark Recognize(RecognizeRequest) returns (RecognizeResponse)
 
-// Deprecated methods.
 /**
  * Performs synchronous speech recognition: receive results after all audio
  * has been sent and processed.
@@ -109,7 +113,6 @@
 
 #pragma mark LongRunningRecognize(LongRunningRecognizeRequest) returns (Operation)
 
-// Deprecated methods.
 /**
  * Performs asynchronous speech recognition: receive results via the
  * google.longrunning.Operations interface. Returns either an
@@ -152,7 +155,6 @@
 
 #pragma mark StreamingRecognize(stream StreamingRecognizeRequest) returns (stream StreamingRecognizeResponse)
 
-// Deprecated methods.
 /**
  * Performs bidirectional streaming speech recognition: receive results while
  * sending audio. This method is only available via the gRPC API (not REST).

@@ -1,17 +1,17 @@
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
 #import "google/longrunning/Operations.pbrpc.h"
 #import "google/longrunning/Operations.pbobjc.h"
-#import <ProtoRPC/ProtoRPC.h>
+#import <ProtoRPC/ProtoRPCLegacy.h>
 #import <RxLibrary/GRXWriter+Immediate.h>
 
 #import "google/api/Annotations.pbobjc.h"
 #if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
-#import <Protobuf/Any.pbobjc.h>
+#import <protobuf/Any.pbobjc.h>
 #else
 #import "google/protobuf/Any.pbobjc.h"
 #endif
 #if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
-#import <Protobuf/Empty.pbobjc.h>
+#import <protobuf/Empty.pbobjc.h>
 #else
 #import "google/protobuf/Empty.pbobjc.h"
 #endif
@@ -66,7 +66,6 @@
 
 #pragma mark GetOperation(GetOperationRequest) returns (Operation)
 
-// Deprecated methods.
 /**
  * Gets the latest state of a long-running operation.  Clients may use this
  * method to poll the operation result at intervals as recommended by the API
@@ -106,7 +105,6 @@
 
 #pragma mark ListOperations(ListOperationsRequest) returns (ListOperationsResponse)
 
-// Deprecated methods.
 /**
  * Lists operations that match the specified filter in the request. If the
  * server doesn't support this method, it returns
@@ -146,7 +144,6 @@
 
 #pragma mark CancelOperation(CancelOperationRequest) returns (Empty)
 
-// Deprecated methods.
 /**
  * Starts asynchronous cancellation on a long-running operation.  The server
  * makes a best effort to cancel the operation, but success is not
@@ -195,7 +192,6 @@
 
 #pragma mark DeleteOperation(DeleteOperationRequest) returns (Empty)
 
-// Deprecated methods.
 /**
  * Deletes a long-running operation.  It indicates the client is no longer
  * interested in the operation result. It does not cancel the operation.

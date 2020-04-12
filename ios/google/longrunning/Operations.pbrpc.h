@@ -4,7 +4,7 @@
 
 #if !defined(GPB_GRPC_PROTOCOL_ONLY) || !GPB_GRPC_PROTOCOL_ONLY
 #import <ProtoRPC/ProtoService.h>
-#import <ProtoRPC/ProtoRPC.h>
+#import <ProtoRPC/ProtoRPCLegacy.h>
 #import <RxLibrary/GRXWriteable.h>
 #import <RxLibrary/GRXWriter.h>
 #endif
@@ -20,23 +20,23 @@
 #if !defined(GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO) || !GPB_GRPC_FORWARD_DECLARE_MESSAGE_PROTO
   #import "google/api/Annotations.pbobjc.h"
 #if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
-  #import <Protobuf/Any.pbobjc.h>
+  #import <protobuf/Any.pbobjc.h>
 #else
   #import "google/protobuf/Any.pbobjc.h"
 #endif
 #if defined(GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS) && GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS
-  #import <Protobuf/Empty.pbobjc.h>
+  #import <protobuf/Empty.pbobjc.h>
 #else
   #import "google/protobuf/Empty.pbobjc.h"
 #endif
   #import "google/rpc/Status.pbobjc.h"
 #endif
 
-@class GRPCProtoCall;
 @class GRPCUnaryProtoCall;
 @class GRPCStreamingProtoCall;
 @class GRPCCallOptions;
 @protocol GRPCProtoResponseHandler;
+@class GRPCProtoCall;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -185,7 +185,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Basic service implementation, over gRPC, that only does
  * marshalling and parsing.
  */
-@interface Operations : GRPCProtoService<Operations, Operations2>
+@interface Operations : GRPCProtoService<Operations2, Operations>
 - (instancetype)initWithHost:(NSString *)host callOptions:(GRPCCallOptions *_Nullable)callOptions NS_DESIGNATED_INITIALIZER;
 + (instancetype)serviceWithHost:(NSString *)host callOptions:(GRPCCallOptions *_Nullable)callOptions;
 // The following methods belong to a set of old APIs that have been deprecated.
