@@ -27,7 +27,7 @@ RCT_EXPORT_METHOD(setSpeechContextPhrases:(NSArray<NSString *> *)speechContextPh
     [SpeechRecognitionService sharedInstance].speechContextPhrases = speechContextPhrases;
 }
 
-RCT_EXPORT_METHOD(start) {
+RCT_EXPORT_METHOD(start:(NSString *)locale) {
     [self startSpeech:false];
 }
 
@@ -140,7 +140,7 @@ RCT_EXPORT_METHOD(stop) {
 
 #pragma mark - AudioControllerDelegate
 
-- (void)processSampleData:(NSData *)data {
+- (void)processSampleData:(NSData *)data (NSString *) locale {
     [self.audioData appendData:data];
     NSInteger frameCount = [data length] / 2;
     int16_t *samples = (int16_t *) [data bytes];
@@ -174,7 +174,7 @@ RCT_EXPORT_METHOD(stop) {
                     [self stopSpeech];
                 }
             }
-        }];
+        } locale: locale];
         self.audioData = [[NSMutableData alloc] init];
     }
 }
