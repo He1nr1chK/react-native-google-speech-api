@@ -76,7 +76,7 @@ public class GoogleSpeechApiModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void start(String languageCode) {
-        LANG_CODE = languageCode
+        LANG_CODE = languageCode;
         Log.i(TAG, "start");
         if (apiKey == null) {
             sendJSErrorEvent("call setApiKey() with valid access token before calling start()");
