@@ -28,7 +28,7 @@ RCT_EXPORT_METHOD(setSpeechContextPhrases:(NSArray<NSString *> *)speechContextPh
 }
 
 RCT_EXPORT_METHOD(start:(NSString *)locale) {
-    [self startSpeech:false language:locale];
+    [self startSpeech:false withLanguage:locale];
 }
 
 RCT_EXPORT_METHOD(stop) {
@@ -66,7 +66,7 @@ RCT_EXPORT_METHOD(stop) {
 
 #pragma mark - Private
 
-- (void)startSpeech:(BOOL)isNewIOUnit (NSString *)language {
+- (void)startSpeech:(BOOL)isNewIOUnit withLanguage:(NSString *)language {
     
     NSString *valueToSave = language;
     [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"language"];
@@ -104,7 +104,7 @@ RCT_EXPORT_METHOD(stop) {
     // Try once again to start speech if recreation of IOUnit succeded.
     // Handle error otherwise.
     if (!error) {
-        [self startSpeech:YES];
+        [self startSpeech:YES withLanguage:language];
     } else {
         [self handleStartError:error];
         [self stopSpeech];
