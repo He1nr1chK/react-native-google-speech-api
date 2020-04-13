@@ -140,7 +140,7 @@ RCT_EXPORT_METHOD(stop) {
 
 #pragma mark - AudioControllerDelegate
 
-- (void)processSampleData:(NSData *)data (NSString *) locale {
+- (void)processSampleData:(NSData *)data {
     [self.audioData appendData:data];
     NSInteger frameCount = [data length] / 2;
     int16_t *samples = (int16_t *) [data bytes];
@@ -174,7 +174,7 @@ RCT_EXPORT_METHOD(stop) {
                     [self stopSpeech];
                 }
             }
-        } locale: locale];
+        }];
         self.audioData = [[NSMutableData alloc] init];
     }
 }
