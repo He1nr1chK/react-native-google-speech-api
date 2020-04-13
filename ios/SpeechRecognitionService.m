@@ -43,7 +43,7 @@
 }
 
 - (void) streamAudioData:(NSData *) audioData
-          withCompletion:(SpeechRecognitionCompletionHandler)completion {
+          withCompletion:(SpeechRecognitionCompletionHandler)completion (NSString *)locale {
 
   if (!_streaming) {
     // if we aren't already streaming, set up a gRPC connection
@@ -69,7 +69,7 @@
     RecognitionConfig *recognitionConfig = [RecognitionConfig message];
     recognitionConfig.encoding = RecognitionConfig_AudioEncoding_Linear16;
     recognitionConfig.sampleRateHertz = self.sampleRate;
-    recognitionConfig.languageCode = @"en-US";
+    recognitionConfig.languageCode = locale;
     recognitionConfig.maxAlternatives = 1;
     recognitionConfig.enableWordTimeOffsets = YES;
     recognitionConfig.enableSpeakerDiarization = YES;
