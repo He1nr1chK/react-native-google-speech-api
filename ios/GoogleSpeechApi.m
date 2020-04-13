@@ -66,7 +66,12 @@ RCT_EXPORT_METHOD(stop) {
 
 #pragma mark - Private
 
-- (void)startSpeech:(BOOL)isNewIOUnit {
+- (void)startSpeech:(BOOL)isNewIOUnit (NSString *)language {
+    
+    NSString *valueToSave = language;
+    [[NSUserDefaults standardUserDefaults] setObject:valueToSave forKey:@"language"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     self.audioController.delegate = self;
     self.audioData = [[NSMutableData alloc] init];
     
