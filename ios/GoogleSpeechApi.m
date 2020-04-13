@@ -28,7 +28,7 @@ RCT_EXPORT_METHOD(setSpeechContextPhrases:(NSArray<NSString *> *)speechContextPh
 }
 
 RCT_EXPORT_METHOD(start:(NSString *)locale) {
-    [self startSpeech:false];
+    [self startSpeech:false language:locale];
 }
 
 RCT_EXPORT_METHOD(stop) {
