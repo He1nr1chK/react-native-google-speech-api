@@ -30,7 +30,7 @@ public class GoogleSpeechApiModule extends ReactContextBaseJavaModule {
     private static final String KEY_MESSAGE = "message";
     private static final String ON_SPEECH_RECOGNIZED = "onSpeechRecognized";
     private static final String ON_SPEECH_RECOGNIZED_ERROR = "onSpeechRecognizedError";
-    private static final String LANG_CODE = "en-GB";
+    public String LANG_CODE = "en-GB";
 
     private VoiceRecorder voiceRecorder = new VoiceRecorder();
     private SpeechService speechService;
