@@ -30,6 +30,7 @@ public class GoogleSpeechApiModule extends ReactContextBaseJavaModule {
     private static final String KEY_MESSAGE = "message";
     private static final String ON_SPEECH_RECOGNIZED = "onSpeechRecognized";
     private static final String ON_SPEECH_RECOGNIZED_ERROR = "onSpeechRecognizedError";
+    private static final String LANG_CODE = "en-GB";
 
     private VoiceRecorder voiceRecorder = new VoiceRecorder();
     private SpeechService speechService;
@@ -75,6 +76,7 @@ public class GoogleSpeechApiModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void start(String languageCode) {
+        LANG_CODE = languageCode
         Log.i(TAG, "start");
         if (apiKey == null) {
             sendJSErrorEvent("call setApiKey() with valid access token before calling start()");
@@ -128,7 +130,7 @@ public class GoogleSpeechApiModule extends ReactContextBaseJavaModule {
     private void onVoiceStart() {
         Log.i(TAG, "onVoiceStart");
         if (speechService != null) {
-            speechService.startRecognizing(voiceRecorder.getSampleRate(), apiKey);
+            speechService.startRecognizing(voiceRecorder.getSampleRate(), apiKey, LANG_CODE);
         }
     }
 
