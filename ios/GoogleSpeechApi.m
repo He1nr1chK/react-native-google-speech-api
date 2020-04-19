@@ -173,7 +173,7 @@ RCT_EXPORT_METHOD(stop) {
                     }
                 }
                 NSString *transcript = response.resultsArray.firstObject.alternativesArray.firstObject.transcript;
-                NSLog(@"%@", response.resultsArray.firstObject.alternativesArray.firstObject);
+                NSLog(@"RESPONSE: %@", response);
 //                 NSString *speaker = response.resultsArray.firstObject.alternativesArray.firstObject.words.firstObject.speaker_tag;
 //                 NSString *start_time = response.resultsArray.firstObject.alternativesArray.firstObject.words.firstObject.start_time.;
 //                 NSString *end_time = response.resultsArray.firstObject.alternativesArray.firstObject.transcript;
