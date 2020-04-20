@@ -172,13 +172,12 @@ RCT_EXPORT_METHOD(stop) {
                         finished = YES;
                     }
                 }
-                NSString *transcript = response.resultsArray.firstObject.alternativesArray.firstObject.transcript;
-                NSLog(@"RESPONSE: %@", response);
-//                 NSString *speaker = response.resultsArray.firstObject.alternativesArray.firstObject.words.firstObject.speaker_tag;
-//                 NSString *start_time = response.resultsArray.firstObject.alternativesArray.firstObject.words.firstObject.start_time.;
-//                 NSString *end_time = response.resultsArray.firstObject.alternativesArray.firstObject.transcript;
+                int speakerTag = response.resultsArray.firstObject.alternativesArray.firstObject.wordsArray.firstObject.speakerTag;
+                int start_time = response.resultsArray.firstObject.alternativesArray.firstObject.wordsArray.firstObject.startTime.nanos/1000000 + response.resultsArray.firstObject.alternativesArray.firstObject.wordsArray.firstObject.startTime.seconds*1000;
+                int end_time = response.resultsArray.firstObject.alternativesArray.firstObject.wordsArray.lastObject.endTime.nanos/1000000 + response.resultsArray.firstObject.alternativesArray.firstObject.wordsArray.lastObject.endTime.seconds*1000;
+              
                 [self sendEventWithName:@"onSpeechRecognized"
-                                   body:@{@"text": transcript, @"isFinal":@(finished)}];
+                                   body:@{@"transcript": response.resultsArray.firstObject.alternativesArray.firstObject.transcript, @"speakerTag": [NSNumber numberWithInt:speakerTag], @"start_time": [NSNumber numberWithInt:start_time], @"end_time": [NSNumber numberWithInt:end_time], @"isFinal":@(finished)}];
                 if (finished) {
                     [self stopSpeech];
                 }
