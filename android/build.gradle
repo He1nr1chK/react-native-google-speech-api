@@ -84,6 +84,7 @@ dependencies {
     implementation "io.grpc:grpc-okhttp:1.4.0"
     implementation "io.grpc:grpc-protobuf-lite:1.4.0"
     implementation "io.grpc:grpc-stub:1.4.0"
+    implementation "com.google.api.grpc:proto-google-cloud-speech-v1p1beta1:0.1.29"
 
     // Annotation API
     implementation 'javax.annotation:javax.annotation-api:1.2'
